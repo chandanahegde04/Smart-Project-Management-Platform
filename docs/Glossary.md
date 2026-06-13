@@ -33,3 +33,34 @@ Permanent storage for application data.
 
 Example:
 PostgreSQL
+
+## Browser
+
+Software used to access websites.
+
+Examples:
+Chrome, Safari, Firefox.
+
+---
+
+## Server
+
+A computer that provides data to clients.
+
+---
+
+## HTTP
+
+Protocol used for communication between browser and server.
+
+---
+
+## Request
+
+Message sent from client to server.
+
+---
+
+## Response
+
+Message sent from server to client.

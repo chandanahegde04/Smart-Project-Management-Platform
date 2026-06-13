@@ -48,3 +48,24 @@ An API is a communication contract that allows applications to exchange data.
 ### What is Entity Framework Core?
 
 Entity Framework Core is an Object Relational Mapper (ORM) that maps C# objects to database tables and generates SQL automatically.
+
+## Day 2
+
+### What I Learned
+
+A browser requests data from a server.
+
+React runs in the browser.
+
+ASP.NET Core runs on a server.
+
+PostgreSQL stores data.
+
+React communicates with ASP.NET Core using HTTP requests.
+
+### New Concepts
+
+- Browser
+- Server
+- HTTP Request
+- HTTP Response
