@@ -29,3 +29,16 @@ Completed
 -
 
 ---
+
+## Day 1
+
+### Completed
+
+- Created GitHub Repository
+- Created README
+- Created Documentation Structure
+- Understood High-Level Architecture
+
+### Next Step
+
+Understand how a browser communicates with a backend API.
