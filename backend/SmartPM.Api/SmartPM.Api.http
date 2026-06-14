@@ -1,0 +1,6 @@
+@SmartPM.Api_HostAddress = http://localhost:5256
+
+GET {{SmartPM.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
