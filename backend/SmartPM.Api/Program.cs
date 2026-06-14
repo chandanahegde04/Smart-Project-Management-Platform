@@ -1,4 +1,5 @@
-using SmartApi.Models;
+using SmartPM.Api.Models;
+using SmartPM.Api.Endpoints;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,24 +15,5 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.MapGet("/api/projects", () =>
-{
-    var projects = new[]
-    {
-        new Project
-        {
-            Id = 1,
-            Name = "Smart Project Management Platform",
-            Status = "In Progress"
-        },
-        new Project
-        {
-            Id = 2,
-            Name = "Learning ASP.NET Core",
-            Status = "Completed"
-        }
-    };
-
-    return Results.Ok(projects);
-});
+app.MapProjectEndpoints();
 app.Run();

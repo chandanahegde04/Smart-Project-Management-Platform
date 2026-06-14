@@ -1,4 +1,4 @@
-namespace SmartApi.Models
+namespace SmartPM.Api.Models
 {
     public class Project
     {
