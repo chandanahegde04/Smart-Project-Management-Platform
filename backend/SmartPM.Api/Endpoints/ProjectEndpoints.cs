@@ -1,27 +1,14 @@
 using SmartPM.Api.Models;
 namespace SmartPM.Api.Endpoints;
+using SmartPM.Api.Services;
 
 public static class ProjectEndpoints
 {
     public static void MapProjectEndpoints(this WebApplication app)
     {
-        app.MapGet("/api/projects", () =>
+        app.MapGet("/api/projects", (ProjectService projectService) =>
         {
-            var projects = new[]
-            {
-                new Project
-                {
-                    Id = 1,
-                    Name = "Smart Project Management Platform",
-                    Status = "In Progress"
-                },
-                new Project
-                {
-                    Id = 2,
-                    Name = "Learning ASP.NET Core",
-                    Status = "Completed"
-                }
-            };
+            var projects = projectService.GetProjects();
 
             return Results.Ok(projects);
         });
