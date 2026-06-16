@@ -1,6 +1,8 @@
 using SmartPM.Api.Models;
 using SmartPM.Api.Endpoints;
 using SmartPM.Api.Services;
+using Microsoft.EntityFrameworkCore;
+using SmartPM.Api.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,7 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
 builder.Services.AddSingleton<ProjectService>();
-
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
