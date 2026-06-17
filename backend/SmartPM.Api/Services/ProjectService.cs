@@ -1,25 +1,25 @@
+using Microsoft.EntityFrameworkCore;
+using SmartPM.Api.Data;
 using SmartPM.Api.Models;
 
 namespace SmartPM.Api.Services;
 
 public class ProjectService
 {
-    public List<Project> GetProjects()
+    private readonly AppDbContext _dbContext;
+
+    public ProjectService(AppDbContext dbContext)
     {
-        return new List<Project>
-        {
-            new Project
-            {
-                Id = 1,
-                Name = "Smart Project Management Platform",
-                Status = "In Progress"
-            },
-            new Project
-            {
-                Id = 2,
-                Name = "Learning ASP.NET Core",
-                Status = "Completed"
-            }
-        };
+        _dbContext = dbContext;
+    }
+
+    public async Task<List<Project>> GetProjectsAsync()
+    {
+        return await _dbContext.Projects.ToListAsync();
+    }
+    public async Task<Project?> GetProjectByIdAsync(int id)
+    {
+        return await _dbContext.Projects
+        .FirstOrDefaultAsync(p => p.Id == id);
     }
 }
