@@ -19,5 +19,23 @@ public static class ProjectEndpoints
 
             return project is null? Results.NotFound() : Results.Ok(project);
         });
+        app.MapPost("/api/projects", async (Project project,
+        ProjectService projectService) =>
+        {
+            var createdProject =
+            await projectService.CreateProjectAsync(project);
+            return Results.Created( $"/api/projects/{createdProject.Id}", createdProject);
+        });
+        app.MapPut("/api/projects/{id}", async (int id, Project project, ProjectService projectService) =>
+        {
+        var updatedProject =
+            await projectService.UpdateProjectAsync(id, project);
+            return updatedProject is null ? Results.NotFound() : Results.Ok(updatedProject);
+        });
+        app.MapDelete("/api/projects/{id}", async (int id, ProjectService projectService) =>
+        {
+            var deleted = await projectService.DeleteProjectAsync(id);
+            return deleted ? Results.NoContent() : Results.NotFound();
+        });
     }
 }

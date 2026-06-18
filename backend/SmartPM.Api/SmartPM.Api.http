@@ -1,6 +1,7 @@
-@SmartPM.Api_HostAddress = http://localhost:5256
+POST http://localhost:5256/api/projects
+Content-Type: application/json
 
-GET {{SmartPM.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
+{
+    "name": "Learning React",
+    "status": "In Progress"
+}
