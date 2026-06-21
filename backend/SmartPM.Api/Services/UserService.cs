@@ -20,4 +20,26 @@ public class UserService
             .FirstOrDefaultAsync(
                 x => x.Username == username);
     }
+    public async Task<User> CreateUserAsync(
+    string username,
+    string password)
+{
+    var user = new User
+    {
+        Username = username,
+        PasswordHash = password
+    };
+
+    _dbContext.Users.Add(user);
+
+    await _dbContext.SaveChangesAsync();
+
+    return user;
+}
+ public async Task<bool> UserExistsAsync(
+    string username)
+{
+    return await _dbContext.Users
+        .AnyAsync(x => x.Username == username);
+}
 }
