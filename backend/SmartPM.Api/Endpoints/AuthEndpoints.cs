@@ -8,20 +8,26 @@ public static class AuthEndpoints
     public static void MapAuthEndpoints(this WebApplication app)
     {
         app.MapPost("/api/auth/login",
-        (
+        async (
             LoginRequest request,
+            UserService userService,
             JwtService jwtService
         ) =>
         {
-            if (request.Username == "admin" && request.Password == "password")
-            {
-                var token =jwtService.GenerateToken(request.Username);
+            var user = await userService
+                .GetByUsernameAsync(request.Username);
 
-                return Results.Ok(
-                    new
-                    {
-                        Token = token
-                    });
+            if (user is not null &&
+                user.PasswordHash == request.Password)
+            {
+                var token =
+                    jwtService.GenerateToken(
+                        user.Username);
+
+                return Results.Ok(new
+                {
+                    Token = token
+                });
             }
 
             return Results.Unauthorized();
