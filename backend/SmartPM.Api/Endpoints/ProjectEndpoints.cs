@@ -12,7 +12,7 @@ public static class ProjectEndpoints
             var projects = await projectService.GetProjectsAsync();
 
             return Results.Ok(projects);
-        }).RequireAuthorization();
+        });
         app.MapGet("/api/projects/{id}", async (int id, ProjectService projectService) =>
         {
             var project =
