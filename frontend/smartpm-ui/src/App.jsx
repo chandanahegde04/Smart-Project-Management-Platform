@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import {
   getProjects,
-  createProject
+  createProject,
+  updateProject
 } from "./services/projectService";
 
-import ProjectList from "./components/ProjectList";
 import ProjectForm from "./components/ProjectForm";
+import EditProjectForm from "./components/EditProjectForm";
 
 function App() {
   const [projects, setProjects] = useState([]);
@@ -34,20 +35,39 @@ function App() {
       console.error(error);
     }
   }
+  async function handleUpdate(id, project) {
+  try {
+    await updateProject(id, project);
+    await loadProjects();
+  } catch (error) {
+    console.error(error);
+  }
+}
 
   return (
-    <div>
-      <h1>Smart Project Management Platform</h1>
+  <div>
+    <h1>Smart Project Management Platform</h1>
 
-      <ProjectForm
-        onCreate={handleCreate}
-      />
+    <ProjectForm
+      onCreate={handleCreate}
+    />
 
-      <ProjectList
-        projects={projects}
-      />
-    </div>
-  );
+    <h2>Projects</h2>
+
+    {projects.map(project => (
+      <div key={project.id}>
+        <p>
+          {project.name} - {project.status}
+        </p>
+
+        <EditProjectForm
+          project={project}
+          onUpdate={handleUpdate}
+        />
+      </div>
+    ))}
+  </div>
+);
 }
 
 export default App;

@@ -32,7 +32,7 @@ public static class ProjectEndpoints
         var updatedProject =
             await projectService.UpdateProjectAsync(id, project);
             return updatedProject is null ? Results.NotFound() : Results.Ok(updatedProject);
-        }).RequireAuthorization();
+        });
         app.MapDelete("/api/projects/{id}", async (int id, ProjectService projectService) =>
         {
             var deleted = await projectService.DeleteProjectAsync(id);

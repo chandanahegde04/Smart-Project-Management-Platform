@@ -25,3 +25,22 @@ export async function createProject(project) {
 
   return await response.json();
 }
+
+export async function updateProject(id, project) {
+  const response = await fetch(
+    `http://localhost:5256/api/projects/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(project)
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to update project");
+  }
+
+  return await response.json();
+}
