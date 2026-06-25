@@ -9,3 +9,19 @@ export async function getProjects() {
 
   return await response.json();
 }
+
+export async function createProject(project) {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(project)
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create project");
+  }
+
+  return await response.json();
+}

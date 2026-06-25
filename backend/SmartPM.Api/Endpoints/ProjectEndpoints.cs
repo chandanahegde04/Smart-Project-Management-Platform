@@ -26,7 +26,7 @@ public static class ProjectEndpoints
             var createdProject =
             await projectService.CreateProjectAsync(project);
             return Results.Created( $"/api/projects/{createdProject.Id}", createdProject);
-        }).RequireAuthorization();
+        });
         app.MapPut("/api/projects/{id}", async (int id, Project project, ProjectService projectService) =>
         {
         var updatedProject =
