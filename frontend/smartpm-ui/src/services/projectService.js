@@ -44,3 +44,15 @@ export async function updateProject(id, project) {
 
   return await response.json();
 }
+export async function deleteProject(id) {
+  const response = await fetch(
+    `http://localhost:5256/api/projects/${id}`,
+    {
+      method: "DELETE"
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to delete project");
+  }
+}

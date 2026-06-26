@@ -37,6 +37,6 @@ public static class ProjectEndpoints
         {
             var deleted = await projectService.DeleteProjectAsync(id);
             return deleted ? Results.NoContent() : Results.NotFound();
-        }).RequireAuthorization();
+        });
     }
 }

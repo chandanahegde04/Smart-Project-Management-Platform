@@ -20,3 +20,8 @@ obj/
 
 # ASP.NET Core
 appsettings.Development.json
+
+node_modules
+dist
+.env
+.DS_Store

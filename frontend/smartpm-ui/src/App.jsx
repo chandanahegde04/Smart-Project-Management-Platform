@@ -1,73 +1,33 @@
-import { useEffect, useState } from "react";
-import {
-  getProjects,
-  createProject,
-  updateProject
-} from "./services/projectService";
-
-import ProjectForm from "./components/ProjectForm";
-import EditProjectForm from "./components/EditProjectForm";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import Projects from "./pages/Projects";
+import "./App.css";
 
 function App() {
-  const [projects, setProjects] = useState([]);
-
-  async function loadProjects() {
-    try {
-      const data = await getProjects();
-      setProjects(data);
-    }
-    catch (error) {
-      console.error(error);
-    }
-  }
-
-  useEffect(() => {
-    loadProjects();
-  }, []);
-
-  async function handleCreate(project) {
-    try {
-      await createProject(project);
-
-      await loadProjects();
-    }
-    catch (error) {
-      console.error(error);
-    }
-  }
-  async function handleUpdate(id, project) {
-  try {
-    await updateProject(id, project);
-    await loadProjects();
-  } catch (error) {
-    console.error(error);
-  }
-}
-
   return (
-  <div>
-    <h1>Smart Project Management Platform</h1>
+    <BrowserRouter>
+      <div>
+        <h1>Smart Project Management Platform</h1>
 
-    <ProjectForm
-      onCreate={handleCreate}
-    />
+        <nav
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "20px",
+            marginBottom: "20px",
+          }}
+        >
+          <Link to="/">Dashboard</Link>
+          <Link to="/projects">Projects</Link>
+        </nav>
 
-    <h2>Projects</h2>
-
-    {projects.map(project => (
-      <div key={project.id}>
-        <p>
-          {project.name} - {project.status}
-        </p>
-
-        <EditProjectForm
-          project={project}
-          onUpdate={handleUpdate}
-        />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/projects" element={<Projects />} />
+        </Routes>
       </div>
-    ))}
-  </div>
-);
+    </BrowserRouter>
+  );
 }
 
 export default App;
